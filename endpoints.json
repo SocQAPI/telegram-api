@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "platform": "telegram",
+  "platformName": "Telegram",
+  "baseUrl": "https://api.socq.ai",
+  "creditUsd": 0.005,
+  "endpoints": [
+    {
+      "publicId": "telegram/channel-info",
+      "name": "Telegram Channel Info API",
+      "description": "Look up public Telegram channels by t.me link for title, description, avatar, verification badge and subscriber count.",
+      "method": "POST",
+      "path": "/v1/telegram/channel-info",
+      "payload": "payloads/channel-info.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 1,
+        "emptyResultPolicy": "base_only",
+        "estimateInputField": "urls"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/telegram/channel-info",
+      "landingUrl": "https://socq.ai/apis/telegram/channel-info",
+      "required": [
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Links to public Telegram channels, up to 50, such as https://t.me/durov.",
+            "maxItems": 50
+          }
+        },
+        "required": [
+          "urls"
+        ],
+        "description": "Provide up to 50 public Telegram channel links in urls. Each channel that exists returns one row with its title, description, avatar, verification and subscriber, photo, video and link counts."
+      }
+    },
+    {
+      "publicId": "telegram/channel-posts",
+      "name": "Telegram Channel Scraper API",
+      "description": "Collect a public Telegram channel's posts newest first, with text, publish time, views, reaction totals, photos and videos.",
+      "method": "POST",
+      "path": "/v1/telegram/channel-posts",
+      "payload": "payloads/channel-posts.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.3 credits ($0.0015) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.3,
+        "estimateResultCount": 20,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/telegram/channel-posts",
+      "landingUrl": "https://socq.ai/apis/telegram/channel-posts",
+      "required": [
+        "url"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 20
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Link to a public Telegram channel, such as https://t.me/durov."
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "description": "Provide one public Telegram channel link in url. Posts come newest first; results_limit defaults to 20 and accepts integers from 1 to 1000."
+      }
+    },
+    {
+      "publicId": "telegram/post-detail",
+      "name": "Telegram Post Detail API",
+      "description": "Get specific Telegram posts by link, from any public channels, with full text, publish time, views, reactions and media.",
+      "method": "POST",
+      "path": "/v1/telegram/post-detail",
+      "payload": "payloads/post-detail.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 1,
+        "emptyResultPolicy": "base_only",
+        "estimateInputField": "urls"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/telegram/post-detail",
+      "landingUrl": "https://socq.ai/apis/telegram/post-detail",
+      "required": [
+        "urls"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "description": "Links to posts in public Telegram channels, up to 50, such as https://t.me/durov/510.",
+            "maxItems": 50
+          }
+        },
+        "required": [
+          "urls"
+        ],
+        "description": "Provide up to 50 Telegram post links in urls. Each post that exists returns one row with its text, views, reactions, media and reply context."
+      }
+    },
+    {
+      "publicId": "telegram/post-comments",
+      "name": "Telegram Comments API",
+      "description": "Collect up to 100 comments under a Telegram channel post from its discussion group, with author, text, time, reactions and reply target.",
+      "method": "POST",
+      "path": "/v1/telegram/post-comments",
+      "payload": "payloads/post-comments.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.3 credits ($0.0015) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.3,
+        "estimateResultCount": 100,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/telegram/post-comments",
+      "landingUrl": "https://socq.ai/apis/telegram/post-comments",
+      "required": [
+        "url"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 100
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Link to a post in a public Telegram channel, such as https://t.me/durov/510."
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "description": "Provide one Telegram post link in url. Comments are read from the discussion group linked to the channel. results_limit defaults to 100, the maximum."
+      }
+    },
+    {
+      "publicId": "telegram/similar-channels",
+      "name": "Telegram Similar Channels API",
+      "description": "Find the channels Telegram recommends next to a public channel, each with username, title, verification badge and subscriber count.",
+      "method": "POST",
+      "path": "/v1/telegram/similar-channels",
+      "payload": "payloads/similar-channels.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 10,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/telegram/similar-channels",
+      "landingUrl": "https://socq.ai/apis/telegram/similar-channels",
+      "required": [
+        "url"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Link to a public Telegram channel, such as https://t.me/durov."
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "description": "Provide one public Telegram channel link in url. The result lists the channels Telegram recommends alongside it, usually about 10, with their subscriber counts."
+      }
+    },
+    {
+      "publicId": "telegram/channel-search",
+      "name": "Telegram Channel Search API",
+      "description": "Search a public Telegram channel's full post history for a word or phrase and get the matching posts with text, date and views.",
+      "method": "POST",
+      "path": "/v1/telegram/channel-search",
+      "payload": "payloads/channel-search.json",
+      "launchedAt": "2026-11-17",
+      "price": "0.5 credits ($0.0025) per result",
+      "billing": {
+        "baseCredits": 0,
+        "mode": "base_plus_result",
+        "resultUnitSize": 1,
+        "resultUnitCredits": 0.5,
+        "estimateResultCount": 20,
+        "emptyResultPolicy": "base_only"
+      },
+      "docsUrl": "https://docs.socq.ai/api-manual/telegram/channel-search",
+      "landingUrl": "https://socq.ai/apis/telegram/channel-search",
+      "required": [
+        "query",
+        "url"
+      ],
+      "requiredAnyOf": [],
+      "mutuallyExclusive": [],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Words to look for in the channel's posts."
+          },
+          "results_limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Link to a public Telegram channel, such as https://t.me/durov."
+          }
+        },
+        "required": [
+          "query",
+          "url"
+        ],
+        "description": "Provide one public Telegram channel link in url and the words to look for in query. The whole history of the channel is searched; results_limit defaults to 20 and accepts integers from 1 to 100."
+      }
+    }
+  ]
+}

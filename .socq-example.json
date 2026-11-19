@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "templateVersion": "2.0.0",
+  "kind": "platform",
+  "platform": "telegram",
+  "endpointCount": 6,
+  "endpoints": [
+    "telegram/channel-info",
+    "telegram/channel-posts",
+    "telegram/post-detail",
+    "telegram/post-comments",
+    "telegram/similar-channels",
+    "telegram/channel-search"
+  ],
+  "landingPage": "https://socq.ai/apis/telegram",
+  "docsPage": "https://docs.socq.ai/api-manual/telegram/overview",
+  "generatedFrom": "SocQAPI/socq-example-template"
+}
